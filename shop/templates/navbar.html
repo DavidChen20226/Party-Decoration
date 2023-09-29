@@ -1,0 +1,117 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button>
+
+       <span class="navbar-toggler-icon"></span>
+        </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+           <li class="nav-item dropdown">
+           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">shop</a>
+
+    
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                 <li><a class="dropdown-item" href="{% url 'shop:all_products' %}">All Products</a></li>
+                    {% for cat in links %}
+                        <li><a class="dropdown-item" href="{{cat.get_absolute_url}}">{{cat.name}}</a></li>
+                    {% endfor %}
+                 </ul>
+                 </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="#">Your Cart</a>
+                 </li> 
+                 {% if item_count > 0 %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'cart:cart_detail' %}"><i 
+                      class="fas fa-shopping-cart">({{item_count}})</i></a>
+                  </li>
+                  {% endif %}           
+
+                </ul>
+                <form class="d-flex" action="{% url 'search_app:searchResult' %}" method="get">
+                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
+                 <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form> 
+
+                <p>
+                  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Advance-Search
+                  </a>
+                  
+                </p>
+                <div class="collapse" id="collapseExample">
+                  <div class="card card-body">
+                    <body>
+                      <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-static-top">
+                          <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                              <ul class="navbar-nav mr-auto">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#">Search</a>
+                                </li>
+                              </ul>
+                          </div>
+                      </nav>
+                  
+                      <main role="main" class="container">
+                  
+                        <h3>Search Filter </h3>
+                        <form method="GET" action=".">
+                          <div class="form-row">
+                              <div class="form-group col-12">
+                                  <div class="input-group">
+                                      <input class="form-control py-2 border-right-0 border" type="search" name="title_contains" placeholder="Products contains..." />
+                                      <span class="input-group-append">
+                                          <div class="input-group-text bg-transparent">
+                                              <i class="fa fa-search"></i>
+                                          </div>
+                                      </span>
+                                  </div>
+                              </div>        
+                          </div>
+                          
+                          <div class="form-row">
+                              <div class="form-group col-12">
+                                  <div class="input-group">
+                                      <input class="form-control py-2 border-right-0 border" type="search" name="title_or_author" placeholder="Price Of Products" />
+                                      <span class="input-group-append">
+                                          <div class="input-group-text bg-transparent">
+                                              <i class="fa fa-search"></i>
+                                          </div>
+                                      </span>
+                                  </div>
+                              </div>        
+                          </div>
+                  
+                          <div class="form-row row">
+                            <div class="form-group col-md-2 col-lg-2">
+                              <label for="PriceLow">PriceLow</label>
+                              <input type="number" min=0 class="form-control" id="PriceLow" placeholder="0" name="Price_Low">
+                            </div>
+                            <div class="form-group col-md-2 col-lg-2">
+                              <label for="PriceHigh">PriceHigh</label>
+                              <input type="number" min=0 class="form-control" id="PriceHigh" placeholder="10000?" name="Price_High">
+                            </div>
+                          
+                            <div class="form-group col-md-4">
+                              <label for="category">Category</label>
+                              <select id="category" class="form-control" name="category">
+                                <option selected>Choose...</option>
+                                {% for cat in categories %}
+                                <option value="{{ cat }}">{{ cat }}</option>
+                                {% endfor %}
+                              </select>
+                            </div>
+                          
+                          </div>
+                          <button type="submit" class="btn btn-primary">Search</button>
+                        
+                  
+                      </main>
+                  
+                      
+                  </body>
+                  </div>
+                </div>
+        </div>
+    </div>
+</nav>
